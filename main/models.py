@@ -1,8 +1,26 @@
+from pyexpat import model
 from django.db import models
 
 
-class Region(models.Model):
+class Country(models.Model):
     name = models.CharField(max_length=100)
+
+
+    class Meta:
+        verbose_name = "Davlat"
+        verbose_name_plural = "Davlatlar"
+
+    def __str__(self):
+        return self.name
+
+
+class Region(models.Model):
+    country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.CASCADE)   
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "Viloyat"
+        verbose_name_plural = "Viloyatlar"
 
     def __str__(self):
         return self.name
@@ -11,6 +29,13 @@ class Region(models.Model):
 class Carservice(models.Model):
     region = models.ForeignKey(Region, null=True, blank=True, on_delete=models.CASCADE)   
     name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "Xizmat"
+        verbose_name_plural = "Xizmatlar"
+
+
+    
 
     def __str__(self):
         return self.name
@@ -28,6 +53,11 @@ class Masters(models.Model):
     working_hours = models.CharField(max_length=100, blank=True) # Ish vaqti
     working_days = models.CharField(max_length=50, blank=True)    # Ish kuni
     occupation = models.CharField(max_length=100, blank=True)     # Faoliyati
+
+
+    class Meta:
+        verbose_name = "Usta"
+        verbose_name_plural = "Ustalar"
     
     def __str__(self):
         return self.name        

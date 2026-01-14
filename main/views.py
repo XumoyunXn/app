@@ -3,10 +3,21 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
-from .models import Region, Carservice, Masters
-from .serializers import RegionSerializer, CarserviceSerializer, MastersSerializer
+from .models import Region, Carservice, Masters, Country
+from .serializers import RegionSerializer, CarserviceSerializer, MastersSerializer, CountrySerializer
 from rest_framework.permissions import AllowAny, DjangoModelPermissionsOrAnonReadOnly
 
+class CountryList(APIView):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    
+
+    def get_queryset(self):
+        return Country.objects.all()
+    
+    def get(self, request):
+        regions = Country.objects.all()
+        serializer = CountrySerializer(regions, many=True)
+        return Response(serializer.data)
 
 
 
