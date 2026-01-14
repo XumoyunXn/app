@@ -1,13 +1,19 @@
 from dataclasses import field
 from pyexpat import model
 from rest_framework import serializers
-from .models import Region, Carservice, Masters, Country
+from .models import Region, Carservice, Masters, Country, New
 
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Country
         fields = '__all__'
+
+
+class NewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = New
+        fields = '__all__'        
 
 
 class RegionSerializer(serializers.ModelSerializer):

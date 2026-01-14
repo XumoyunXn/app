@@ -1,4 +1,5 @@
 from pyexpat import model
+from turtle import mode
 from django.db import models
 
 
@@ -60,4 +61,20 @@ class Masters(models.Model):
         verbose_name_plural = "Ustalar"
     
     def __str__(self):
-        return self.name        
+        return self.name       
+
+
+
+class New(models.Model): 
+    images = models.ImageField(upload_to='images/') 
+    name = models.CharField(max_length=255)         
+    text = models.TextField()
+
+    class Meta:
+        verbose_name = "Yangilik"
+        verbose_name_plural = "Yangiliklar"
+    
+    def __str__(self):
+        return self.name   
+
+
